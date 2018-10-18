@@ -2,7 +2,7 @@ package Basic;
 
 /*
  * この構造は非常によくないので、ListenerAdapterクラスを継承するかまたは、それを継承するが
- * Mainメソッドを持たない関数にするべきです。 
+ * Mainメソッドを持たない関数にするべきです。
  * 現場からは以上です。
  * (要約：このクラスの構造はまずい)
  */
@@ -37,8 +37,6 @@ public class Quiz extends App {
 		}
 
 		app.objMsgCh.sendMessage(qdisp).queue();
-
-		// ここからsleepしたりhoge�?...
 	}
 
 }
