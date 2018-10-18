@@ -22,6 +22,7 @@ import net.dv8tion.jda.core.managers.AudioManager;
 import net.dv8tion.jda.core.requests.Route;
 
 public class App extends ListenerAdapter {
+	public MessageChannel objMsgCh = null;
 
 	public static void main(String[] args) throws Exception {
 
@@ -48,7 +49,7 @@ public class App extends ListenerAdapter {
 		//Objects
 		User objUser = evt.getAuthor();
 		Message objMsg = evt.getMessage();
-		MessageChannel objMsgCh = evt.getChannel();
+		objMsgCh = evt.getChannel();
 		Member objMem = evt.getMember();
 		net.dv8tion.jda.core.entities.Guild objGld = evt.getGuild();
 
