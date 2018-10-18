@@ -52,6 +52,7 @@ public class App extends ListenerAdapter {
 		objMsgCh = evt.getChannel();
 		Member objMem = evt.getMember();
 		net.dv8tion.jda.core.entities.Guild objGld = evt.getGuild();
+		User user = objMsg.getAuthor();
 
 
 		//Commands
@@ -313,6 +314,8 @@ public class App extends ListenerAdapter {
 								+ "\n"
 								+ "\nプレイ中のゲーム：" + objMem.getGame()
 								+ "\n"
+								+ "\nアカウント作成日時：" + objUser.getCreationTime()
+								+ "\n"
 								+ "\nサーバー参加日時：" + objMem.getJoinDate()
 								+ "\n"
 								+ "\nステータス：" + objMem.getOnlineStatus()
@@ -321,18 +324,15 @@ public class App extends ListenerAdapter {
 								+ "\n"
 								+ "\n役職：" + objMem.getRoles()
 								+ "\n"
-								+ "\nボイス：" + objMem.getVoiceState());
+								+ "\nボイスステータス：" + objMem.getVoiceState());
 		ebMem.addBlankField(false);
 		ebMem.setAuthor(objUser.getName(), null, null);
 		ebMem.setThumbnail(objUser.getAvatarUrl());
 		ebMem.appendDescription(objUser.getId());
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "user" + objMsg.getMentionedUsers()))		// + objMsg.getMentionedUsers()
+		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "user " + objMsg.getMentionedUsers().indexOf(0)))
 			objMsgCh.sendMessage(ebMem.build()).queue();
 
-		String MentionedUser = null;
-		if(objMsg.getContentRaw().startsWith(Ref.prefix + "usertest"))
-			MentionedUser = objMsg.getMentionedUsers().toString();
-			objMsgCh.sendMessage(MentionedUser).queue();
+
 
 
 		//BotStatus

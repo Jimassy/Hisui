@@ -3,9 +3,9 @@ package Basic;
 public class Quiz extends App{
 
 	App app = new App();
-	String q1 = "Q?��Hisuiのアイコンのシルエ�?ト�?�鳥の名前はなんでしょ�??��\n1.カワセミ\n2.�?バメ\n3.ハチドリ\n4.トン�?";
-	String q2 = "問�?2";
-	String q3 = "問�?3";
+	String q1 = "Q．Hisuiのアイコンのシルエットの鳥の名前はなんでしょう？\\n1.カワセミ\\n2.ツバメ\\n3.ハチドリ\\n4.トンビ";
+	String q2 = "問題2";
+	String q3 = "問題3";
 
 	public void play(){
 
