@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.security.auth.login.LoginException;
 import javax.sound.sampled.AudioFormat;			//Audio Formatのインポート文。
 
+import Method.Gacha;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
@@ -141,39 +142,8 @@ public class App extends ListenerAdapter {
 
 
 		//Gacha
-		double random = Math.random();
-		int die = 0;
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "gacha"))
-
-
-			die = (int)(random*6)+1;
-
-			switch (die) {
-
-			case 1:
-				objMsgCh.sendMessage("エミリア").queue();
-				break;
-
-			case 2:
-				objMsgCh.sendMessage("レム").queue();
-				break;
-
-			case 3:
-				objMsgCh.sendMessage("ラム").queue();
-				break;
-
-			case 4:
-				objMsgCh.sendMessage("ベアトリス").queue();
-				break;
-
-			case 5:
-				objMsgCh.sendMessage("ペトラ").queue();
-				break;
-
-			case 6:
-				objMsgCh.sendMessage("ペテルギウス").queue();
-				break;
-		}
+		Gacha gacha = new Gacha();
+		gacha.doMethod(objMsg, objMsgCh);
 
 		//EmbedTest
 		EmbedBuilder eb = new EmbedBuilder();								//EmbedBuilderインスタンスを作る
