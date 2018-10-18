@@ -1,12 +1,6 @@
 package Basic;
 
-/*
- * この構造は非常によくないので、ListenerAdapterクラスを継承するかまたは、それを継承するが
- * Mainメソッドを持たない関数にするべきです。
- * 現場からは以上です。
- * (要約：このクラスの構造はまずい)
- */
-public class Quiz extends App {
+public class Quiz{
 
 	App app = new App();
 	String q1 = "Q．Hisuiのアイコンのシルエットの鳥の名前はなんでしょう？\\n1.カワセミ\\n2.ツバメ\\n3.ハチドリ\\n4.トンビ";
