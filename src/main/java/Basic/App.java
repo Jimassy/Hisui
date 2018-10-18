@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import javax.sound.sampled.AudioFormat;			//Audio Formatのインポート文。
 
 import Method.Gacha;
+import Method.Guilds;
 import Method.Initialize;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -179,69 +180,8 @@ public class App extends ListenerAdapter {
 
 
 		//Guild
-		EmbedBuilder ebgld = new EmbedBuilder();
-		ebgld.setTitle("サーバー情報", null)	;
-		ebgld.setColor(Color.red);
-		ebgld.setDescription("サーバー名：" + objGld.getName()
-								+ "\n"
-								+ "\nオーナー：" + objGld.getOwner()
-								+ "\n"
-								+ "\nサーバーリージョン：" + objGld.getRegionRaw()
-								+ "\n"
-								+ "\nAFKチャンネル：" + objGld.getAfkChannel()
-								+ "\n"
-								+ "\nAFKタイムアウト時間：" + objGld.getAfkTimeout()
-								+ "\n"
-								+ "\nBANされたユーザー：" + objGld.getBanList()
-								+ "\n"
-								+ "\nカテゴリー一覧：" + objGld.getCategories()
-								+ "\n"
-								+ "\nコントローラー：" + objGld.getController()
-								+ "\n"
-								+ "\nサーバー作成日時：" + objGld.getCreationTime()
-								+ "\n"
-								+ "\nデフォルトチャンネル：" + objGld.getDefaultChannel()
-								+ "\n"
-								+ "\nデフォルト通知レベル：" + objGld.getDefaultNotificationLevel()
-								+ "\n"
-								+ "\n絵文字キャッシュ：" + objGld.getEmoteCache()
-								+ "\n"
-								+ "\nExplicit content level：" + objGld.getExplicitContentLevel()
-								+ "\n"
-								+ "\nフィーチャー：" + objGld.getFeatures()
-								+ "\n"
-								+ "\nマネージャー：" + objGld.getManager()
-								+ "\n"
-								+ "\nメンバー：" + objGld.getMember(objUser)
-								+ "\n"
-								+ "\nパブリックロール：" + objGld.getPublicRole()
-								+ "\n"
-								+ "\n役職：" + objGld.getRoles()
-								+ "\n"
-								+ "\nセルフメンバー：" + objGld.getSelfMember()
-								+ "\n"
-								+ "\nシステムチャンネル：" + objGld.getSystemChannel()
-								+ "\n"
-								+ "\nチャンネルのキャッシュ：" + objGld.getTextChannelCache()
-								+ "\n"
-								+ "\nRequired MFA Level：" + objGld.getRequiredMFALevel()
-								+ "\n"
-								+ "\nVerification level：" + objGld.getVerificationLevel()
-								+ "\n"
-								+ "\nボイスチャンネルのキャッシュ：" + objGld.getVoiceChannelCache()
-								+ "\n"
-								+ "\nボイスチャンネル：" + objGld.getVoiceChannels()
-								+ "\n"
-								+ "\nボイスステータス：" + objGld.getVoiceStates()
-								+ "\n"
-								+ "\nWebhook：" + objGld.getWebhooks());
-		ebgld.addBlankField(false);
-		ebgld.setAuthor("実行者：" + objUser.getName(), null, null);
-		ebgld.setThumbnail(objGld.getIconUrl());
-
-
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "guild"))
-			objMsgCh.sendMessage(ebgld.build()).queue();
+		Guilds guilds = new Guilds();
+		guilds.doMethod(objGld, objUser, objMsg, reportChannel);
 
 
 		//Member
