@@ -1,6 +1,6 @@
-target
+/target
 .classpath
 .project
 .vscode
-bin
-.gradle
+/bin
+/.gradle
