@@ -9,6 +9,7 @@ import javax.sound.sampled.AudioFormat;			//Audio Formatのインポート文。
 import Method.Gacha;
 import Method.Guilds;
 import Method.Initialize;
+import Method.MenthionUserInfo;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
@@ -181,38 +182,12 @@ public class App extends ListenerAdapter {
 
 		//Guild
 		Guilds guilds = new Guilds();
-		guilds.doMethod(objGld, objUser, objMsg, reportChannel);
+		guilds.doMethod(objGld, objUser, objMsg, objMsgCh);
 
 
 		//Member
-		EmbedBuilder ebMem = new EmbedBuilder();
-		ebMem.setTitle("ユーザー情報", null)	;
-		ebMem.setColor(Color.green);
-		ebMem.setDescription("名前：" + objMem.getAsMention()
-								+ "\n"
-								+ "\nニックネーム：" + objMem.getEffectiveName()
-								+ "\n"
-								+ "\nカラー：" + objMem.getColor()
-								+ "\n"
-								+ "\nプレイ中のゲーム：" + objMem.getGame()
-								+ "\n"
-								+ "\nアカウント作成日時：" + objUser.getCreationTime()
-								+ "\n"
-								+ "\nサーバー参加日時：" + objMem.getJoinDate()
-								+ "\n"
-								+ "\nステータス：" + objMem.getOnlineStatus()
-								+ "\n"
-								+ "\nパーミッション：" + objMem.getPermissions()
-								+ "\n"
-								+ "\n役職：" + objMem.getRoles()
-								+ "\n"
-								+ "\nボイスステータス：" + objMem.getVoiceState());
-		ebMem.addBlankField(false);
-		ebMem.setAuthor(objUser.getName(), null, null);
-		ebMem.setThumbnail(objUser.getAvatarUrl());
-		ebMem.appendDescription(objUser.getId());
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "user " + objMsg.getMentionedUsers().indexOf(0)))
-			objMsgCh.sendMessage(ebMem.build()).queue();
+		MenthionUserInfo info = new MenthionUserInfo();
+		info.doMethod(objMsg, objUser, objMsgCh);
 
 
 
