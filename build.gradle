@@ -2,7 +2,6 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven'
 apply plugin: 'jacoco'
-apply plugin: 'java-library'
 
 mainClassName = "src.main.java.Basic.App.App"
 
@@ -17,11 +16,12 @@ allprojects {
 dependencies {
     // https://mvnrepository.com/artifact/junit/junit
     // junit is test framework
-    implementation 'junit:junit:4.12'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
     // https://mvnrepository.com/artifact/com.discord4j/Discord4J
-    implementation 'com.discord4j:Discord4J:2.10.1'
+    compile group: 'com.discord4j', name: 'Discord4J', version: '2.10.1'
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
-    implementation 'net.dv8tion:JDA:3.8.0_434'
+    compile group: 'net.dv8tion', name: 'JDA', version: '3.8.0_434'
+
 
 
 
