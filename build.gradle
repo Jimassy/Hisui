@@ -3,7 +3,7 @@ apply plugin: 'application'
 apply plugin: 'maven'
 apply plugin: 'jacoco'
 
-mainClassName = "src.main.java.Basic.App.App"
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
   mavenCentral();
