@@ -6,6 +6,10 @@ import java.util.HashMap;
 import javax.security.auth.login.LoginException;
 import javax.sound.sampled.AudioFormat;			//Audio Formatのインポート文。
 
+import Method.Gacha;
+import Method.Guilds;
+import Method.Initialize;
+import Method.MenthionUserInfo;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
@@ -52,40 +56,12 @@ public class App extends ListenerAdapter {
 		objMsgCh = evt.getChannel();
 		Member objMem = evt.getMember();
 		net.dv8tion.jda.core.entities.Guild objGld = evt.getGuild();
+		User user = objMsg.getAuthor();
 
 
 		//Commands
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "自己紹介"))
-			objMsgCh.sendMessage(objUser.getAsMention() + "ハロー！僕はHisuiです。").queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix+"おはよう"))
-			objMsgCh.sendMessage("おはよう" +objMem.getEffectiveName() + "さん").queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix+"hello"))
-			objMsgCh.sendMessage("こんにちは、" + objUser.getAsMention() + "さん").queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase("おやすみ、Hisui"))
-			objMsgCh.sendMessage("よく寝てくださいね！").queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "avatar"))
-			objMsgCh.sendMessage(objUser.getAvatarUrl()).queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "defaultavatar"))
-			objMsgCh.sendMessage(objUser.getDefaultAvatarUrl()).queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "nick"))
-			objMsgCh.sendMessage(objMem.getEffectiveName()).queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix+"招待"))
-			objMsgCh.sendMessage(objMsg.getInvites().toString()).queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix+"id"))
-			objMsgCh.sendMessage("あなたのIDはこれ！\n```java\n" + objUser.getId() + "```").queue();
-
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "SplashID"))			//SplashIDというものが取得できるものの、どうやったらSplashがデフォルトから変更できるのかがわからない
-			objMsgCh.sendMessage(objGld.getSplashId()).queue();
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "SplashURL"))
-			objMsgCh.sendMessage(objGld.getSplashUrl()).queue();
-		String strGld = String.valueOf(objGld);										//このコードは単にオブジェクトをString型に変換する方法をメモしたかっただけ
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "ギルドオブジェクト"))
-			objMsgCh.sendMessage(strGld).queue();
-
-		if(objMsg.getContentRaw().equalsIgnoreCase("うんち"))
-			objMsgCh.deleteMessageById(objMsgCh.getLatestMessageId());
-			objMsgCh.sendMessage("おっと。" + objUser.getAsMention() + "さんの発言を消しておいたよ。");
-			objMsgCh.deleteMessageById(objMsgCh.getLatestMessageId());
+		Initialize init = new Initialize();
+		init.doMethod(objMsg, objMsgCh, objMem, objUser, objGld);
 
 		//Invite
 		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix+"invite")) {
@@ -140,39 +116,8 @@ public class App extends ListenerAdapter {
 
 
 		//Gacha
-		double random = Math.random();
-		int die = 0;
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "gacha"))
-
-
-			die = (int)(random*6)+1;
-
-			switch (die) {
-
-			case 1:
-				objMsgCh.sendMessage("エミリア").queue();
-				break;
-
-			case 2:
-				objMsgCh.sendMessage("レム").queue();
-				break;
-
-			case 3:
-				objMsgCh.sendMessage("ラム").queue();
-				break;
-
-			case 4:
-				objMsgCh.sendMessage("ベアトリス").queue();
-				break;
-
-			case 5:
-				objMsgCh.sendMessage("ペトラ").queue();
-				break;
-
-			case 6:
-				objMsgCh.sendMessage("ペテルギウス").queue();
-				break;
-		}
+		Gacha gacha = new Gacha();
+		gacha.doMethod(objMsg, objMsgCh);
 
 		//EmbedTest
 		EmbedBuilder eb = new EmbedBuilder();								//EmbedBuilderインスタンスを作る
@@ -236,103 +181,15 @@ public class App extends ListenerAdapter {
 
 
 		//Guild
-		EmbedBuilder ebgld = new EmbedBuilder();
-		ebgld.setTitle("サーバー情報", null)	;
-		ebgld.setColor(Color.red);
-		ebgld.setDescription("サーバー名：" + objGld.getName()
-								+ "\n"
-								+ "\nオーナー：" + objGld.getOwner()
-								+ "\n"
-								+ "\nサーバーリージョン：" + objGld.getRegionRaw()
-								+ "\n"
-								+ "\nAFKチャンネル：" + objGld.getAfkChannel()
-								+ "\n"
-								+ "\nAFKタイムアウト時間：" + objGld.getAfkTimeout()
-								+ "\n"
-								+ "\nBANされたユーザー：" + objGld.getBanList()
-								+ "\n"
-								+ "\nカテゴリー一覧：" + objGld.getCategories()
-								+ "\n"
-								+ "\nコントローラー：" + objGld.getController()
-								+ "\n"
-								+ "\nサーバー作成日時：" + objGld.getCreationTime()
-								+ "\n"
-								+ "\nデフォルトチャンネル：" + objGld.getDefaultChannel()
-								+ "\n"
-								+ "\nデフォルト通知レベル：" + objGld.getDefaultNotificationLevel()
-								+ "\n"
-								+ "\n絵文字キャッシュ：" + objGld.getEmoteCache()
-								+ "\n"
-								+ "\nExplicit content level：" + objGld.getExplicitContentLevel()
-								+ "\n"
-								+ "\nフィーチャー：" + objGld.getFeatures()
-								+ "\n"
-								+ "\nマネージャー：" + objGld.getManager()
-								+ "\n"
-								+ "\nメンバー：" + objGld.getMember(objUser)
-								+ "\n"
-								+ "\nパブリックロール：" + objGld.getPublicRole()
-								+ "\n"
-								+ "\n役職：" + objGld.getRoles()
-								+ "\n"
-								+ "\nセルフメンバー：" + objGld.getSelfMember()
-								+ "\n"
-								+ "\nシステムチャンネル：" + objGld.getSystemChannel()
-								+ "\n"
-								+ "\nチャンネルのキャッシュ：" + objGld.getTextChannelCache()
-								+ "\n"
-								+ "\nRequired MFA Level：" + objGld.getRequiredMFALevel()
-								+ "\n"
-								+ "\nVerification level：" + objGld.getVerificationLevel()
-								+ "\n"
-								+ "\nボイスチャンネルのキャッシュ：" + objGld.getVoiceChannelCache()
-								+ "\n"
-								+ "\nボイスチャンネル：" + objGld.getVoiceChannels()
-								+ "\n"
-								+ "\nボイスステータス：" + objGld.getVoiceStates()
-								+ "\n"
-								+ "\nWebhook：" + objGld.getWebhooks());
-		ebgld.addBlankField(false);
-		ebgld.setAuthor("実行者：" + objUser.getName(), null, null);
-		ebgld.setThumbnail(objGld.getIconUrl());
-
-
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "guild"))
-			objMsgCh.sendMessage(ebgld.build()).queue();
+		Guilds guilds = new Guilds();
+		guilds.doMethod(objGld, objUser, objMsg, objMsgCh);
 
 
 		//Member
-		EmbedBuilder ebMem = new EmbedBuilder();
-		ebMem.setTitle("ユーザー情報", null)	;
-		ebMem.setColor(Color.green);
-		ebMem.setDescription("名前：" + objMem.getAsMention()
-								+ "\n"
-								+ "\nニックネーム：" + objMem.getEffectiveName()
-								+ "\n"
-								+ "\nカラー：" + objMem.getColor()
-								+ "\n"
-								+ "\nプレイ中のゲーム：" + objMem.getGame()
-								+ "\n"
-								+ "\nサーバー参加日時：" + objMem.getJoinDate()
-								+ "\n"
-								+ "\nステータス：" + objMem.getOnlineStatus()
-								+ "\n"
-								+ "\nパーミッション：" + objMem.getPermissions()
-								+ "\n"
-								+ "\n役職：" + objMem.getRoles()
-								+ "\n"
-								+ "\nボイス：" + objMem.getVoiceState());
-		ebMem.addBlankField(false);
-		ebMem.setAuthor(objUser.getName(), null, null);
-		ebMem.setThumbnail(objUser.getAvatarUrl());
-		ebMem.appendDescription(objUser.getId());
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "user" + objMsg.getMentionedUsers()))		// + objMsg.getMentionedUsers()
-			objMsgCh.sendMessage(ebMem.build()).queue();
+		MenthionUserInfo info = new MenthionUserInfo();
+		info.doMethod(objMsg, objUser, objMsgCh);
 
-		String MentionedUser = null;
-		if(objMsg.getContentRaw().startsWith(Ref.prefix + "usertest"))
-			MentionedUser = objMsg.getMentionedUsers().toString();
-			objMsgCh.sendMessage(MentionedUser).queue();
+
 
 
 		//BotStatus
