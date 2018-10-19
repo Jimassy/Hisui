@@ -21,9 +21,8 @@ dependencies {
     compile group: 'com.discord4j', name: 'Discord4J', version: '2.10.1'
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
     compile group: 'net.dv8tion', name: 'JDA', version: '3.8.0_434'
-
-
-
+    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+	compile group: 'org.yaml', name: 'snakeyaml', version: '1.23'
 
 }
 task wrapper(type: Wrapper) {
