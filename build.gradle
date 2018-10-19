@@ -6,14 +6,23 @@ apply plugin: 'jacoco'
 repositories {
   mavenCentral();
 }
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
 dependencies {
     // https://mvnrepository.com/artifact/junit/junit
     // junit is test framework
     testCompile group: 'junit', name: 'junit', version: '4.12'
     // https://mvnrepository.com/artifact/com.discord4j/Discord4J
     compile group: 'com.discord4j', name: 'Discord4J', version: '2.10.1'
+
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
     compile group: 'net.dv8tion', name: 'JDA', version: '3.8.0_434'
+
+
+
 }
 task wrapper(type: Wrapper) {
     gradleVersion = '1.12'
