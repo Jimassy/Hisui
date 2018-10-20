@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.util.HashMap;
 
 import javax.security.auth.login.LoginException;
-import javax.sound.sampled.AudioFormat;			//Audio Formatのインポート文。
+import javax.sound.sampled.AudioFormat; //Audio Formatのインポート文。
 
 import Method.Gacha;
 import Method.Guilds;
 import Method.Initialize;
 import Method.MenthionUserInfo;
+import Method.Slot;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDABuilder;
@@ -30,22 +31,18 @@ public class App extends ListenerAdapter {
 
 	public static void main(String[] args) throws Exception {
 
-		JDABuilder jdaBuilder = new JDABuilder(AccountType.BOT)
-				.setToken(Ref.token)
-				.setGame(Game.playing("development jounrey"))
-				.addEventListener(new App())
-				.setAutoReconnect(true);
+		JDABuilder jdaBuilder = new JDABuilder(AccountType.BOT).setToken(Ref.token)
+				.setGame(Game.playing("development jounrey")).addEventListener(new App()).setAutoReconnect(true);
 
 		try {
 			jdaBuilder.build();
-		}catch(LoginException error){
+		} catch (LoginException error) {
 			error.printStackTrace();
 		}
 
 		// TODO 自動生成されたメソッド・スタブ
 
 	}
-
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent evt) {
@@ -113,7 +110,15 @@ public class App extends ListenerAdapter {
 		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "coin")) {
 			objMsgCh.sendMessage("きみは" + hashmap.get(objUser.getId()) + "枚のコインを持っているよ！").queue();
 		}
-
+		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "save")) {
+			Slot slot = new Slot();
+			try{
+				slot.save(objUser, 100);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 
 		//Gacha
 		Gacha gacha = new Gacha();

@@ -20,7 +20,7 @@ windows環境の場合 `gradlew.bat` を実行します。
 
 TIP: win環境下でも `gradlew` が実行可能にするためです。
 
-次に `gradlew dependencies` を実行します。
+次に `gradlew build` を実行します。
 
 これで依存関係にあるモノが解決されます。
 
