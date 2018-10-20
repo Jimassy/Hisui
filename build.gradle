@@ -6,12 +6,8 @@ apply plugin: 'jacoco'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
-  mavenCentral();
-}
-allprojects {
-    repositories {
-        jcenter()
-    }
+    jcenter()
+    mavenCentral();
 }
 dependencies {
     // https://mvnrepository.com/artifact/junit/junit
