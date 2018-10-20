@@ -10,6 +10,7 @@ repositories {
     jcenter()
     mavenCentral();
 }
+mainClassName = "Basic.App.App"
 dependencies {
     // https://mvnrepository.com/artifact/junit/junit
     // junit is test framework
@@ -19,9 +20,7 @@ dependencies {
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
     compile group: 'net.dv8tion', name: 'JDA', version: '3.8.0_434'
     // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+    // do not work well
 	compile group: 'org.yaml', name: 'snakeyaml', version: '1.23'
 
-}
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
 }

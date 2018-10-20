@@ -3,4 +3,4 @@
 .project
 /.vscode
 /bin
-/.gradle
+/build
