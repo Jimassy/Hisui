@@ -1,14 +1,14 @@
 package Method;
 
-import net.dv8tion.jda.core.entities.User;
-
 import java.io.File;
 import java.io.FileWriter;
 
-import org.yaml.snakeyaml.*;
+import org.yaml.snakeyaml.Yaml;
+
+import net.dv8tion.jda.core.entities.User;
 
 public class Slot {
-	final protected String filePath = "../../../../data/savedata.yml";
+	final protected String filePath = System.getProperty("user.dir") + "/data/savedata.yml";
 
 	public void doMethod() {
 
@@ -21,6 +21,9 @@ public class Slot {
 			yaml.load(filePath);
 			FileWriter fileWriter = new FileWriter(filePath);
 			yaml.dump("test", fileWriter);
+		}
+		else {
+			throw new Exception();
 		}
 	}
 }
