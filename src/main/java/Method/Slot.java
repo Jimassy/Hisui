@@ -10,5 +10,7 @@ public class Slot {
 
 	public void save(User user, int data) {
 		Yaml yaml = new Yaml();
+		yaml.load("");
+
 	}
 }
