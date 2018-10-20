@@ -1,7 +1,6 @@
 package Basic;
 
 import java.awt.Color;
-import java.util.HashMap;
 
 import javax.security.auth.login.LoginException;
 import javax.sound.sampled.AudioFormat; //Audio Formatのインポート文。
@@ -28,6 +27,7 @@ import net.dv8tion.jda.core.requests.Route;
 
 public class App extends ListenerAdapter {
 	public MessageChannel objMsgCh = null;
+	public Slot slot = new Slot();
 
 	public static void main(String[] args) throws Exception {
 
@@ -95,30 +95,7 @@ public class App extends ListenerAdapter {
 
 
 		//Coin
-		HashMap<String, Integer> hashmap =new HashMap<String, Integer>();
-		int coin = 0;
-
-		if(evt.getAuthor().isBot()) {
-		}else {
-			int x = 1;
-			coin += x;
-			if(hashmap.containsKey(objUser.getId())) {
-				hashmap.put(objUser.getId(), coin);
-			}
-			//objMsgCh.sendMessage("コインが" + x + "枚増えたよ！").queue();		これはテスト用なのでコメント化
-		}
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "coin")) {
-			objMsgCh.sendMessage("きみは" + hashmap.get(objUser.getId()) + "枚のコインを持っているよ！").queue();
-		}
-		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "save")) {
-			Slot slot = new Slot();
-			try{
-				slot.save(objUser, 100);
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-		}
+		slot.doMethod(objMsg, objMsgCh, objUser);
 
 		//Gacha
 		Gacha gacha = new Gacha();
@@ -211,5 +188,16 @@ public class App extends ListenerAdapter {
 		ebuser.setThumbnail(objUser.getAvatarUrl());
 		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "user"))
 		objMsgCh.sendMessage(ebuser.build()).queue();
+
+		// shutdown
+		if(objMsg.getContentRaw().equalsIgnoreCase(Ref.prefix + "shutdown")) {
+			try{
+				slot.save();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
 	}
 }
