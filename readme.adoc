@@ -24,4 +24,10 @@ TIP: win環境下でも `gradlew` が実行可能にするためです。
 
 これで依存関係にあるモノが解決されます。
 
+最後に、今回はなぜかうまく動作しなかった `snakeyaml` をimportします。
+
+`.classpath` に上記のjarを書き加えるため、Eclipse上から、 `lib/snakeyaml-1.23.jar` を追加してください。
+
+もしくは任意のフォルダでも構いません。
+
 CAUTION: 必ずmasterブランチから切って、コーディングしましょう
