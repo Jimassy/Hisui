@@ -24,3 +24,4 @@ dependencies {
 	compile group: 'org.yaml', name: 'snakeyaml', version: '1.23'
 
 }
+mainClassName = 'Basic.App'
