@@ -13,3 +13,19 @@ endif::[]
 # readme
 
 WARNING: masterブランチへの直接pushは禁止とさせて頂きます。
+
+## get started
+
+windows環境の場合 `gradlew.bat` を実行します。
+
+TIP: win環境下でも `gradlew` が実行可能にするためです。
+
+次に `gradlew build` を実行します。
+
+これで依存関係にあるモノが解決されます。
+
+次に `gradlew eclipse` を実行します。
+
+これで、 `classpath` が通ります。
+
+CAUTION: 必ずmasterブランチから切って、コーディングしましょう
