@@ -24,7 +24,7 @@ TIP: win環境下でも `gradlew` が実行可能にするためです。
 
 これで依存関係にあるモノが解決されます。
 
-次に `gradle eclipse` を実行します。
+次に `gradlew eclipse` を実行します。
 
 これで、 `classpath` が通ります。
 
